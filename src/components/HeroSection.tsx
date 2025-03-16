@@ -2,8 +2,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+  
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -30,6 +33,10 @@ const HeroSection = () => {
     'VIRTUALLY FITTING ROOM',
     'YOUR OWN WAY TO DESIGN'
   ];
+
+  const handleTryNowClick = () => {
+    navigate('/virtual-fitting-room');
+  };
 
   return (
     <section className="relative min-h-screen w-full bg-black flex items-center overflow-hidden pt-20">
@@ -83,6 +90,7 @@ const HeroSection = () => {
               className="px-8 py-3 border border-white hover:bg-white hover:text-black transition-all duration-300 flex items-center space-x-2 group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
+              onClick={handleTryNowClick}
             >
               <span>TRY NOW</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
