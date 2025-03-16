@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
+import { User } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -37,6 +39,11 @@ const Navbar = () => {
     ? 'bg-gradient-to-r from-transparent via-white/20 to-transparent' 
     : 'bg-gradient-to-r from-transparent via-black/10 to-transparent';
 
+  // Don't show navbar on auth page
+  if (location.pathname === '/auth') {
+    return null;
+  }
+
   return (
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -52,19 +59,31 @@ const Navbar = () => {
           <h1 className="text-2xl md:text-3xl font-bold tracking-wider">HQFits</h1>
         </Link>
         
-        <nav className="hidden md:flex items-center space-x-8">
-          {navItems.map((item, index) => (
-            <Link 
-              key={index} 
-              to={item.path}
-              className={`text-sm font-medium transition-colors hover:text-blue-400 ${
-                location.pathname === item.path ? 'text-blue-400' : `${textColor}/80`
-              }`}
+        <div className="flex items-center">
+          <nav className="hidden md:flex items-center space-x-8 mr-8">
+            {navItems.map((item, index) => (
+              <Link 
+                key={index} 
+                to={item.path}
+                className={`text-sm font-medium transition-colors hover:text-blue-400 ${
+                  location.pathname === item.path ? 'text-blue-400' : `${textColor}/80`
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
+          <Link to="/auth">
+            <Button 
+              variant={isDarkPage ? "outline" : "default"} 
+              size="sm" 
+              className={`${isDarkPage ? 'border-white text-white hover:bg-white hover:text-black' : ''}`}
             >
-              {item.name}
-            </Link>
-          ))}
-        </nav>
+              <User size={16} className="mr-2" />
+              Log In
+            </Button>
+          </Link>
+        </div>
       </div>
       <div className={`absolute bottom-0 left-0 right-0 h-[1px] ${borderColor}`}></div>
     </motion.header>
