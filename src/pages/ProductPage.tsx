@@ -1,11 +1,16 @@
 
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Clock } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { useToast } from '@/hooks/use-toast';
 
 const ProductPage = () => {
+  const { toast } = useToast();
+
   // Smooth scroll to top when component mounts
   useEffect(() => {
     window.scrollTo({
@@ -13,6 +18,14 @@ const ProductPage = () => {
       behavior: 'smooth'
     });
   }, []);
+
+  const handleCardClick = (itemName: string) => {
+    toast({
+      title: "Coming Soon!",
+      description: `${itemName} will be available soon. Stay tuned!`,
+      duration: 3000,
+    });
+  };
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -194,20 +207,28 @@ const ProductPage = () => {
             {topCategories.map((category) => (
               <motion.div 
                 key={category.id}
-                className="bg-white overflow-hidden"
+                className="bg-white overflow-hidden cursor-pointer"
                 variants={fadeIn}
+                onClick={() => handleCardClick(category.name)}
               >
-                <div className="h-64 overflow-hidden">
-                  <img 
-                    src={category.image} 
-                    alt={category.name} 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-4 text-center">
-                  <h3 className="font-semibold text-lg mb-1">{category.name}</h3>
-                  <p className="text-sm text-gray-600">{category.description}</p>
-                </div>
+                <Card className="h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 relative group">
+                  <div className="absolute top-0 right-0 p-2 bg-black text-white rounded-bl-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Clock size={18} className="inline-block mr-1" /> Coming Soon
+                  </div>
+                  <CardContent className="p-0">
+                    <div className="h-64 overflow-hidden">
+                      <img 
+                        src={category.image} 
+                        alt={category.name} 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="p-4 text-center">
+                      <h3 className="font-semibold text-lg mb-1">{category.name}</h3>
+                      <p className="text-sm text-gray-600">{category.description}</p>
+                    </div>
+                  </CardContent>
+                </Card>
               </motion.div>
             ))}
           </motion.div>
@@ -237,20 +258,28 @@ const ProductPage = () => {
             {ourClothes.map((item) => (
               <motion.div 
                 key={item.id}
-                className="overflow-hidden"
+                className="overflow-hidden cursor-pointer"
                 variants={fadeIn}
+                onClick={() => handleCardClick(item.name)}
               >
-                <div className="h-64 overflow-hidden">
-                  <img 
-                    src={item.image} 
-                    alt={item.name} 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-4 text-center">
-                  <h3 className="font-semibold text-lg mb-1">{item.name}</h3>
-                  <p className="text-sm text-gray-600">{item.description}</p>
-                </div>
+                <Card className="h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 relative group">
+                  <div className="absolute top-0 right-0 p-2 bg-black text-white rounded-bl-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Clock size={18} className="inline-block mr-1" /> Coming Soon
+                  </div>
+                  <CardContent className="p-0">
+                    <div className="h-64 overflow-hidden">
+                      <img 
+                        src={item.image} 
+                        alt={item.name} 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="p-4 text-center">
+                      <h3 className="font-semibold text-lg mb-1">{item.name}</h3>
+                      <p className="text-sm text-gray-600">{item.description}</p>
+                    </div>
+                  </CardContent>
+                </Card>
               </motion.div>
             ))}
           </motion.div>
@@ -320,20 +349,28 @@ const ProductPage = () => {
             {bestSelling.map((item) => (
               <motion.div 
                 key={item.id}
-                className="overflow-hidden"
+                className="overflow-hidden cursor-pointer"
                 variants={fadeIn}
+                onClick={() => handleCardClick(item.name)}
               >
-                <div className="h-80 overflow-hidden">
-                  <img 
-                    src={item.image} 
-                    alt={item.name} 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-4 text-center">
-                  <h3 className="font-semibold text-lg mb-1">{item.name}</h3>
-                  <p className="text-sm text-gray-600">{item.description}</p>
-                </div>
+                <Card className="h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 relative group">
+                  <div className="absolute top-0 right-0 p-2 bg-black text-white rounded-bl-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Clock size={18} className="inline-block mr-1" /> Coming Soon
+                  </div>
+                  <CardContent className="p-0">
+                    <div className="h-80 overflow-hidden">
+                      <img 
+                        src={item.image} 
+                        alt={item.name} 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="p-4 text-center">
+                      <h3 className="font-semibold text-lg mb-1">{item.name}</h3>
+                      <p className="text-sm text-gray-600">{item.description}</p>
+                    </div>
+                  </CardContent>
+                </Card>
               </motion.div>
             ))}
           </motion.div>
